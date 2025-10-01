@@ -2,8 +2,8 @@ package com.example.order.config;
 
 import org.springframework.http.HttpStatus;
 
-import com.example.order.MyCustomBadRequestException;
-import com.example.order.MyCustomServerException;
+import com.example.order.exception.MyCustomBadRequestException;
+import com.example.order.exception.MyCustomServerException;
 
 import feign.Response;
 import feign.codec.ErrorDecoder;

@@ -1,4 +1,4 @@
-package com.example.order;
+package com.example.order.exception;
 
 public class MyCustomServerException extends RuntimeException {
     
