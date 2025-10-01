@@ -1,6 +1,9 @@
 package com.example.product;
 
 import org.springframework.web.bind.annotation.*;
+
+import jakarta.validation.Valid;
+
 import java.util.*;
 
 @RestController
@@ -22,5 +25,13 @@ public class ProductController {
     @GetMapping
     public Collection<Product> getAllProducts() {
         return products.values();
+    }
+    
+    @PostMapping
+    public Product saveProduct(@Valid @RequestBody Product product) {
+        Long id = (long) (products.size() + 1);
+        product.setId(id);
+        products.put(id, product);
+        return product;
     }
 }

@@ -1,8 +1,15 @@
 package com.example.product;
 
+import jakarta.validation.constraints.*;
+
 public class Product {
     private Long id;
+    @NotNull
+    @Size(min = 5, message = "Name must be at least 5 characters long")
     private String name;
+    
+    @NotNull
+    @Max(value = 500, message = "Price cannot be greater than 500")
     private Double price;
     
     public Product() {}
