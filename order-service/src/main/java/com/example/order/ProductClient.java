@@ -8,7 +8,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.order.config.ProductClientConfig;
 
-@FeignClient(name = "product-service", url = "http://localhost:8081" ,configuration = ProductClientConfig.class)
+//with service discovery
+@FeignClient(name = "product-service" ,configuration = ProductClientConfig.class)
+
+//without service discovery
+//@FeignClient(name = "product-service", url = "http://localhost:8081" ,configuration = ProductClientConfig.class)
 public interface ProductClient {
     
     @GetMapping("/products/{id}")
