@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+
 @RestController
 @RequestMapping("/orders-svc")
 public class OrderController {
@@ -29,6 +31,7 @@ public class OrderController {
     }
     
     @GetMapping("/{id}")
+   
     public Order getOrder(@PathVariable Long id) {
         Order order = orders.get(id);
         if (order != null) {
@@ -39,8 +42,14 @@ public class OrderController {
     }
     
     @GetMapping
+    @RateLimiter(name = "orderRateLimiter", fallbackMethod = "rateLimitedfallback")
     public Collection<Order> getAllOrders() {
         return orders.values();
+    }
+    
+    public Collection<Order> rateLimitedfallback(Throwable throwable) {
+    	System.out.println("rateLimitedfallback ....");
+    	return orders.values();
     }
     
     @PostMapping(consumes = "application/json")
